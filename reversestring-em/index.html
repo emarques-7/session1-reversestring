@@ -328,7 +328,7 @@
         </header>
 
         <div class="card">
-            <div class="field-label">Input</div>
+            <label class="field-label" for="inputText">Input</label>
             <input type="text" id="inputText" placeholder="Type something… e.g. AI4Devs" autocomplete="off"
                 spellcheck="false" />
 
@@ -337,7 +337,7 @@
             <div class="divider">Output</div>
 
             <div class="result-area">
-                <div class="result-box" id="resultBox">
+                <div class="result-box" id="resultBox" role="status" aria-live="polite" aria-atomic="true">
                     <span class="placeholder-text">Your reversed string will appear here</span>
                 </div>
                 <button class="btn-copy" id="btnCopy">Copy</button>
