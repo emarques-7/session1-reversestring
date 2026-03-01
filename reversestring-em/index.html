@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse String</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #2a2a3a;
+            --accent: #e8ff47;
+            --accent2: #ff4778;
+            --text: #f0f0f5;
+            --muted: #666680;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(232, 255, 71, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232, 255, 71, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridDrift 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(60px);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 620px;
+            position: relative;
+        }
+
+        /* Decorative glowing orb */
+        .container::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 255, 71, 0.08) 0%, transparent 70%);
+            top: -100px;
+            right: -80px;
+            pointer-events: none;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        h1 span {
+            color: var(--accent);
+            display: inline-block;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Corner accents */
+        .card::before,
+        .card::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent);
+            border-style: solid;
+        }
+
+        .card::before {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .card::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .field-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            padding: 0.85rem 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            caret-color: var(--accent);
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(232, 255, 71, 0.07);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--muted);
+        }
+
+        .btn-reverse {
+            width: 100%;
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background: var(--accent);
+            color: #0a0a0f;
+            border: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-reverse::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.3s;
+        }
+
+        .btn-reverse:hover::after {
+            transform: translateX(100%) skewX(-15deg);
+        }
+
+        .btn-reverse:active {
+            transform: scale(0.98);
+        }
+
+        .btn-reverse:disabled {
+            background: var(--border);
+            color: var(--muted);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-reverse:disabled::after {
+            display: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.75rem 0;
+            color: var(--muted);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .result-area {
+            position: relative;
+        }
+
+        .result-box {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1rem;
+            min-height: 3.2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--accent);
+            word-break: break-all;
+            transition: border-color 0.3s;
+            position: relative;
+        }
+
+        .result-box.has-value {
+            border-color: rgba(232, 255, 71, 0.3);
+        }
+
+        .result-box .placeholder-text {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .btn-copy {
+            position: absolute;
+            top: 50%;
+            right: 0.75rem;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+        }
+
+        .btn-copy:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-copy.copied {
+            border-color: var(--accent2);
+            color: var(--accent2);
+        }
+
+        .btn-copy.visible {
+            display: block;
+        }
+
+        /* Flash animation on result */
+        @keyframes flashIn {
+            0% {
+                opacity: 0;
+                letter-spacing: 0.3em;
+            }
+
+            100% {
+                opacity: 1;
+                letter-spacing: normal;
+            }
+        }
+
+        .result-text {
+            animation: flashIn 0.35s ease forwards;
+        }
+
+        footer {
+            margin-top: 1.5rem;
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="tag">Utility Tool</div>
+            <h1>String<br><span>Reverser</span></h1>
+        </header>
+
+        <div class="card">
+            <div class="field-label">Input</div>
+            <input type="text" id="inputText" placeholder="Type something… e.g. AI4Devs" autocomplete="off"
+                spellcheck="false" />
+
+            <button class="btn-reverse" id="btnReverse" disabled>⇌ Reverse</button>
+
+            <div class="divider">Output</div>
+
+            <div class="result-area">
+                <div class="result-box" id="resultBox">
+                    <span class="placeholder-text">Your reversed string will appear here</span>
+                </div>
+                <button class="btn-copy" id="btnCopy">Copy</button>
+            </div>
+        </div>
+
+        <footer>Press Enter or click Reverse · Result is always copyable</footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
