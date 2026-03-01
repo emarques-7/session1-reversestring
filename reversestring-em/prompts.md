@@ -1,6 +1,6 @@
 Usando Claude chatbot (claude.ai)
 
-Propmt 1:
+Prompt 1:
 
 Eres experto desarrollador senior en javascript.
 
@@ -28,7 +28,7 @@ index.html
 Adicionalmente, puedes agregar un botón que me permita copiar al portapapeles el texto resultante.
 
 
-Propmt 2:
+Prompt 2:
 
 Ahora quiero agregarle un par de mejoras:
 
