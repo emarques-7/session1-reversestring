@@ -4,9 +4,9 @@ Prompt 1:
 
 Eres experto desarrollador senior en javascript.
 
-Tu tarea es crear una pequeña página en javascript que permita capturar una cadena de texto y con una acción en un botón, poder reversar esa cadena de texto y mostrarla luego en otra etiqueta de la página. Ejemplo si escribimos "AI4Devs" la salida debe ser: "sveD4IA".
+Tu tarea es crear una pequeña página en JavaScript que permita capturar una cadena de texto y con una acción en un botón, poder reversar esa cadena de texto y mostrarla luego en otra etiqueta de la página. Ejemplo si escribimos "AI4Devs" la salida debe ser: "sveD4IA".
 
-El apartado visual es libre y debes crearlo en par de archivos script.js e index.html. Para el index.hml, debes basarte en el siguiente template base:
+El apartado visual es libre y debes crearlo en par de archivos script.js e index.html. Para el index.html, debes basarte en el siguiente template base:
 
 index.html
 
