@@ -21,17 +21,22 @@
 
     const MIN_CHARS = 3;
 
+    function getCharCount(str) {
+        return Array.from(str).length;
+    }
+
     /**
      * Updates the result box with the reversed string.
      * Can be called from the button click or from the live input listener.
      */
     function updateResult() {
         const value = inputText.value;
+        const charCount = getCharCount(value);
 
-        if (value.length < MIN_CHARS) {
-            resultBox.innerHTML = value.length === 0
+        if (charCount < MIN_CHARS) {
+            resultBox.innerHTML = charCount === 0
                 ? '<span class="placeholder-text">Your reversed string will appear here</span>'
-                : `<span class="placeholder-text">Keep typing… (${MIN_CHARS - value.length} more character${MIN_CHARS - value.length !== 1 ? 's' : ''})</span>`;
+                : `<span class="placeholder-text">Keep typing… (${MIN_CHARS - charCount} more character${MIN_CHARS - charCount !== 1 ? 's' : ''})</span>`;
             resultBox.classList.remove('has-value');
             btnCopy.classList.remove('visible');
             return;
@@ -71,7 +76,7 @@
      * Keeps the Reverse button in sync with the minimum-character rule.
      */
     function syncButtonState() {
-        const enabled = inputText.value.length >= MIN_CHARS;
+        const enabled = getCharCount(inputText.value) >= MIN_CHARS;
         btnReverse.disabled = !enabled;
     }
 
